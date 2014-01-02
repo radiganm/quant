@@ -1,0 +1,18 @@
+<!-- ===================================
+     Portfolio #2 
+     portfolio_ABT_BA_CXV_GE-25.xml
+     =================================== -->
+<?xml version="1.0" standalone="yes"?>
+<portfolio>
+  <database>./data/quote</database>
+  <output>./results/portfolios</output>
+  <stocks>
+    <stock>ABT</stock>
+    <stock>BA</stock>
+    <stock>CVX</stock>
+    <stock>KO</stock>
+    <stock>GE</stock>
+  </stocks>
+  <roi>25.0</roi>
+</portfolio>
+<!-- *EOF* -->

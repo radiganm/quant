@@ -1,0 +1,16 @@
+<!-- ===================================
+     Portfolio #3 
+     portfolio_AMZN_ORCL_SO-20.xml
+     =================================== -->
+<?xml version="1.0" standalone="yes"?>
+<portfolio>
+  <database>./data/quote</database>
+  <output>./results/portfolios</output>
+  <stocks>
+    <stock>AMZN</stock>
+    <stock>ORCL</stock>
+    <stock>SO</stock>
+  </stocks>
+  <roi>20.0</roi>
+</portfolio>
+<!-- *EOF* -->

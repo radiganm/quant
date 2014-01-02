@@ -1,0 +1,245 @@
+## README Quant
+## Mac Radigan
+
+# This Markowitz example implements the the minimum-variance
+# Markowitz portfolio, for a specified set of portfolio stocks 
+# and target portfolio return on investment.
+#
+# See Also:     http://wikipedia.org/wiki/Modern_portfolio_theory
+#               for more information on the Markowitz portfolio
+
+
+# The objective of a Markowitz portfolio can be stated as follows:
+#   Given a set of investment assets, find the most efficient  
+#   allocation (portfolio weights).  Here, efficiency is defined  
+#   as minimizing the expected variance, for a given return on 
+#   investments (expected return).  Alternatively, a 
+#   Markowitz portfolio may instead maximize the expected return on 
+#   investment for a given expected variance.
+#
+#   Markowitz portfolios may be subject to specified constraints, 
+#   such as a specific return on investment, a specific risk 
+#   tolerance, non-negativity constraints (restricting short 
+#   selling), and may include risk-free assets or market indexes.
+
+#   This example will select a minimum variance portfolio,
+#   constrained to a specified expected rate of return.
+#   All results will be annualized as commonly reported to
+#   investors.
+
+
+#  Markowitz portfolio optimization with constraint on ROI
+# 
+#       minimize:  sigma_p,w^2 = w'*S*w   (minimize variance)
+# 
+#       subject to:     mu_opt = w'*mu    (expected return constraint)
+# 
+#                       w'*1v  = 1        (weight constraint, sum to unity)
+# 
+#       where
+#          sigma_p,w^2      portfolio variances
+#          mu_opt  target   portfolio rate of return
+#          w                portfolio weights
+#          S                covariance matrix
+#          1v               one vector
+# 
+# 
+#            A       *     x       =     b
+#      | 2S  mu 1v | * | w       | = | 0v     |
+#      | mu' 0  0  |   | lambda1 |   | mu_opt |
+#      | 1'  0  0  |   | lambda2 |   | 1      |
+# 
+#        where
+#          S       daily rate of return covariance matrix
+#          mu      daily mean ROIs
+#          mu_opt  target portfolio rate of return
+#          w       portfolio weights
+#          1v      one vector (size of portfolio)
+#          0v      zero vector (size of portfolio)
+#          lambda1 Lagrange multiplier for target return
+#          lambda2 Lagrange multiplier for normalized weight constraint
+
+
+# These example source files contain 2 projects (originally 3), 
+# each implemented in a different source language:
+#
+#   - M-files (Octave-specific)
+#   - C++     (native binary, using Boost and Armadillo)
+#   - Groovy  (with Java interfaces, targeting the JVM, 
+#              using Apache Commons Math)
+
+# Octave (MATLAB-like example):
+#   The Octave implements a function to solve the Markowitz portfolio 
+#   problem described above.  
+#
+#   A test driver (Octave M-File script) is provided that will run 
+#   the first portfolio example: (AAPL,JNJ,LMT,XOM at 25% ROI),
+#
+#   The following will run this case:
+(cd ./Markowitz-Matlab; ./markowitzDemo.m)
+
+# Java (and Groovy) example:
+#   I have not had time to complete the Java (with Groovy) example,
+#   but if you request this in a few days I will be glad to provide it,
+#   along with any numerical improvements in the other examples.
+
+# C++ example:
+#   The C++ example reads an XML description of a portfolio, defining the 
+#   selected stocks for the portfolio, and desired target rate of return.
+#   
+#   The example will print a summary of the efficent (Markowitz optimal) 
+#   portfolio to standard output, and generate a directory of reported 
+#   results in a variety of formats (ASCII, JPEG, PNG, EPS, postscript, etc.).
+#   
+#   The results of the C++ implementation for the first example portfolio 
+#   (i.e. portfolio-1.xml) is shown below:
+#
+# USAGE:
+#
+#   ./bin/markowitz [-h] -f file
+#       options:
+#         -f [ --file ] arg     input data file
+#         -h [ --help ]         print this help message
+#
+# EXAMPLE:
+#
+(cd ./Markowitz-C++; ./bin/markowitz -f ./portfolios/portfolio-AAPL_JPM_LMT_XOM-25.xml)
+#
+#
+#    efficient portfolio: return=25.000%, volatility=11.745%
+#    
+#    	SYMBOL	WEIGHT	RETURN	 VOLATILITY
+#    	AAPL	0.082	11.431%	 28.778%
+#    	JPM	0.120	31.559%	 19.145%
+#    	LMT	0.398	55.809%	 16.328%
+#    	XOM	0.400	08.158%	 13.041%
+#
+#
+#
+#                                 Portfolio Performance
+#   Return (annualized)
+#     40 ++-------+-------+--------+-------+--------+-------+--------+------++
+#        +        +       +        +       +        +       +        +       +
+#     35 ++                                                                 ++
+#        |                                JPM                                |
+#     30 ++                               I                                 ++
+#        |                                                                   |
+#        |                efficient                                          |
+#     25 ++                  I                                              ++
+#        |                                                                   |
+#     20 ++                                                                 ++
+#        |                                                                   |
+#     15 ++                                                                 ++
+#        |                                               AAPL                |
+#     10 ++                    XOM                        I                 ++
+#        |                     I                                             |
+#        |                                                                   |
+#      5 ++                                                                 ++
+#        +        +       +        +       +        +       +        +       +
+#      0 ++-------+-------+--------+-------+--------+-------+--------+------++
+#        0        5       10       15      20       25      30       35      40
+#                                   Risk (annualized)
+#
+# 
+# 
+#                                             AAPL
+# 
+#    price (USD)
+#          ++-+-++--+-++-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-***
+#      560 ++.+.....+....+.....+....+.....+.....+.....+.....+....+.....+....*****
+#          | ***    :    :     :    :     :     :     :     :    :     :   ****|
+#      540******.....................................................****.****++
+#      520*********.................................................**********++
+#          *********:    :     :    :     :     :     : *******  : **********: |
+#      500 ++..*****...................................***************........++
+#      480 ++..***..***................................******.*******.........++
+#          |  :   ****** :  ****    ****  :     :    *****  :****:     :     : |
+#      460 ++....*********.*****....*********.......******....***.............++
+#      440 ++....******************************....****.......................++
+#      420 ++...........*****.************.***********........................++
+#          |  :     :   ***    :  *** *** :  *********:     :    :     :     : |
+#      400 ++.+.....+....+.....+.****.....+...****....+.....+....+.....+.....+++
+#    volume (x 1k)--+-++-+-+-+-+-****-+-+-+-+-***-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+
+#     5000 Jan'13Feb'13ar'13Apr'13ay'13Jun'13Jul'13Aug'13Sep'13ct'13Nov'13Dec'13
+#     4000 ++.+...$.+....+.....+....+.....+.....+.....+.....+....+.....+.....+++
+#     2500 ++...$.$$.$............$$$..$................$....$$$$.............++
+#     1500 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$.$$$$$.$.$$$$$$$$$$$$$.$$$$..$.$$$$
+#     1500 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#          Jan'13Feb'13ar'13Apr'13ay'13Jun'13Jul'13Aug'13Sep'13ct'13Nov'13Dec'13
+# 
+# 
+#                                            JNJ
+#     price (USD)
+#          ++-+-++--+-++-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+****-+
+#       95 ++.+.....+....+.....+....+.....+.....+...*****...+....+....***********
+#          |  :     :    :     :    :     :     : ********  :    : ********* ****
+#       90 ++...........................*........****..****...***.*****.......***
+#          |  :     :    :     :    : *****    *****  :*************** :     : |
+#          |  :     :    :     :  *****************   :  ************  :     : |
+#       85 ++....................*******.********.............................++
+#          |  :     :    :    ******:     *******     :     :    :     :     : |
+#       80 ++...............******............................................++
+#          |  :     :    ******:    :     :     :     :     :    :     :     : |
+#          |  :     :*******   :    :     :     :     :     :    :     :     : |
+#       75 ++....**********...................................................++
+#          |  ********   :     :    :     :     :     :     :    :     :     : |
+#       70*******...+....+.....+....+.....+.....+.....+.....+....+.....+.....+++
+#    volume (x 1k)--+-++-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+
+#     2200 Jan'13Feb'13ar'13Apr'13ay'13Jun'13Jul'13Aug'13Sep'13ct'13Nov'13Dec'13
+#     1600 $$.+.....+....+.$...+$...+.....+...$.+.....+.....+....+.....+.....+++
+#     1200 $$$$$.$$$$.$.$$.$..$$$$$.$..$$$$$..$$.$.$..$$$$.....$....$.........+$
+#     1600 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#      200 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#          Jan'13Feb'13ar'13Apr'13ay'13Jun'13Jul'13Aug'13Sep'13ct'13Nov'13Dec'13
+# 
+# 
+#                                              LMT
+#    price (USD)
+#          ++-+-++--+-++-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-***-+
+#      140 ++.+.....+....+.....+....+.....+.....+.....+.....+....+.....+..*******
+#          |  :     :    :     :    :     :     :     :     :    :    ***********
+#      130 ++.................................................***...*****.....++
+#          |  :     :    :     :    :     :     :     :  ***:**********:     : |
+#          |  :     :    :     :    :     :     :    *********** ******:     : |
+#      120 ++......................................********...................++
+#          |  :     :    :     :    :     :     :*****:     :    :     :     : |
+#      110 ++............................*..*********.........................++
+#          |  :     :    :     :    : *************   :     :    :     :     : |
+#      100 ++.......................*****.***.***.............................++
+#          |  :  ***:    :   **********   :     :     :     :    :     :     : |
+#         **********:    :***********     :     :     :     :    :     :     : |
+#       90*****...***********..+....+.....+.....+.....+.....+....+.....+.....+++
+#    volume (x 1k)**********-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+
+#     1400 Jan'13Feb'13ar'13Apr'13ay'13Jun'13Jul'13Aug'13Sep'13ct'13Nov'13Dec'13
+#     1000 ++.+.....+...$+.....+....+.....+.....+.....+.....+....+.....+.....+++
+#      600 $+......$....$................$..................................$.++
+#      200 $$$$..$$$$$$$$$$$$.$$.$$$$$$$$$$$.$$$+...$.$...$$+.$$.+$..$.$..$$$$++
+#        0 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#          Jan'13Feb'13ar'13Apr'13ay'13Jun'13Jul'13Aug'13Sep'13ct'13Nov'13Dec'13
+# 
+# 
+#                                               XOM
+#     price (USD)
+#          ++-+-++--+-++-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+
+#       96 ++.+.....+....+.....+....+.....+.....+.....+.....+....+.....+..*******
+#          |  :     :    :     :    :     :     : *****     :    :     : ********
+#       94 ++.....................................******.................********
+#          |  :     :    :     :    :   **:     ********    :    :     ********|
+#       92 ++......*...................********.********...............*****..++
+#          |  :  ****    :    **    :**************  ****   :    :     ****  : |
+#          |  : ******  *:*  ****   ***************   ***   :    :     ***   : |
+#       90***..**************************.********.....***....***.....****....++
+#         ******** ********************   *******     :**********:   ****    : |
+#       88*******...******.************.......***......***********.*****......++
+#          *****    :    :     :****:     :     :     : ****************     : |
+#       86 +***.................****............................*****.........++
+#          |***     +    +     + ***+     +     +     +     +    ****  +     + |
+#    vo 84e (x 1k)--+-++-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+++
+#     3500 Jan'13Feb'13ar'13Apr'13ay'13Jun'13Jul'13Aug'13Sep'13ct'13Nov'13Dec'13
+#     2500 +$.+.....+....+.$...+....+.....+...$.+.....+.....+....+.....+.....+++
+#     2000 +$$...$.........$..$..$$$....$.$...$$......$..$.$...$.$.$...$$.$...++
+#     1000 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#      500 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#          Jan'13Feb'13ar'13Apr'13ay'13Jun'13Jul'13Aug'13Sep'13ct'13Nov'13Dec'13
+
+## *EOF*

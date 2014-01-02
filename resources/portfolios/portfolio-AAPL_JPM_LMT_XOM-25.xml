@@ -1,0 +1,17 @@
+<!-- ===================================
+     Portfolio #1 
+     portfolio_AAPL_JPM_LMT_XOM-25.xml
+     =================================== -->
+<?xml version="1.0" standalone="yes"?>
+<portfolio>
+  <database>./data/quote</database>
+  <output>./results/portfolios</output>
+  <stocks>
+    <stock>AAPL</stock>
+    <stock>JPM</stock>
+    <stock>LMT</stock>
+    <stock>XOM</stock>
+  </stocks>
+  <roi>25.0</roi>
+</portfolio>
+<!-- *EOF* -->

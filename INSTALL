@@ -1,0 +1,104 @@
+## INSTALL Quant
+## Mac Radigan
+
+# These example source files contain 3 projects, each
+# implemented in a different source language:
+#
+#   - M-files (Octave-specific)
+#   - C++     (using Boost and Armadillo)
+#   - Groovy  (with Java interfaces, targeting the JVM)
+
+
+# Dependencies:
+#
+#   A list of project dependencies  can be found in ./setup:
+#
+cat ./setup/yum-install.sh | grep yum | grep install
+  yum -y install cmake28*
+  yum -y install maven2
+  yum -y install glibc
+  yum -y install gcc
+  yum -y install gcc-c++
+  yum -y install glibc-static
+  yum -y install java
+  yum -y install java-1.6.0-openjdk
+  yum -y install boost
+  yum -y install root*
+  yum -y install octave octave-forge
+  yum -y install fftw
+  yum -y install atlas
+  yum -y install lapack
+  yum -y install blas
+  yum -y install gnuplot
+  yum -y install maven2
+  yum -y install gnuplot gnuplot-common gnuplot-doc* gnuplot-latex* 
+  yum -y install curl
+  yum -y install armadillo
+  yum -y install liblog4cxx liblog4cxx-devel
+
+# Data:
+#
+#   Financial datasets used  in all examples are located in ./data/quote.
+#
+find ./data/quote
+#
+#   The data may be refreshed from Yahoo! Finance with the following
+#   script (used curl for network file transfer):
+#
+bash ./setup/download-stock-data.sh
+
+
+#  Octave Example:
+#
+#    To run:
+#      The demo script will a Markowitz portfolio optimation on an
+#      example portfolio, and save resulting figures to a ./results 
+#      directory.
+#
+(cd ./octave; ./markowitzDemo.m)
+#
+#    NOTE:  This example is NOT MATLAB compatible.
+
+
+#  C++ Example:
+#
+#    To compile:
+#      The C++ example uses a CMake (2.8 or later) build system.
+#
+(cd ./native; cmake .; make)
+#
+#    To run:
+#      The demo script will a Markowitz portfolio optimation on a few
+#      sets of example portfolios, and save resulting figures to a
+#      ./results directory.
+#
+# USAGE:
+#
+#   ./bin/markowitz [-h] -f file
+#       options:
+#         -f [ --file ] arg     input data file
+#         -h [ --help ]         print this help message
+#
+(cd ./native; sh ./run_Markowitz_Demos.sh)
+
+
+
+
+#  Groovy Example (Java-compatible):
+#
+#    To compile:
+#      The Groovy example uses a Maven (2 or later) build system.
+#
+(cd ./jvm; mvn package)
+#
+#    To run:
+#      The demo script will a Markowitz portfolio optimation on a few
+#      sets of example portfolios, and save resulting figures to a
+#      ./results directory.
+#
+(cd ./jvm; sh ./markowitz-demo.sh)
+#
+#    NOTE:  This example IS Java compatible.
+
+
+## *EOF*

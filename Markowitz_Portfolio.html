@@ -17,7 +17,7 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <!--a id="forkme_banner" href="https://github.com/radiganm/quant">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/radiganm/quant">View on GitHub</a>
 
           <h1 id="project_title">Quant</h1>
           <h2 id="project_tagline">Quantitative Finance</h2>
@@ -25,7 +25,7 @@
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/radiganm/quant/zipball/master">Download this project as a .zip file</a>
               <a class="tar_download_link" href="https://github.com/radiganm/quant/tarball/master">Download this project as a tar.gz file</a>
-            </section-->
+            </section>
         </header>
     </div>
 
@@ -142,7 +142,8 @@ $$</div>
 \end{equation}
 $$</div>
 
-<p>This may be solved for $$\mathbf{b}$$, where the first $$n-2$$ elements of $$\mathbf{b}$$ are the portfolio weights ($$\mathbf{w}_{n} = \mathbf{b}_{n}$$).</p>
+<p>This may be solved for $\mathbf{b}$, where the first $n-2$ elements of $\mathbf{b}$ are the portfolio weights ($\mathbf{w}_{n} = \mathbf{b}_{n}$).</p>
+<span>This may be solved for $\mathbf{b}$, where the first $n-2$ elements of $\mathbf{b}$ are the portfolio weights ($\mathbf{w}_{n} = \mathbf{b}_{n}$).</span>
 
 <div>$$
 \begin{equation}
@@ -150,6 +151,45 @@ $$</div>
 \label{eq:lineq_mat}
 \end{equation}
 $$</div>
+
+<h3><a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Example Portfolio #1: AAPL, JPM, LMT, XOM</h3>
+
+
+<div>$$
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{ l l l l }
+\toprule
+\multicolumn{5}{ c }{ \textbf{Portfolio \#1 (AAPL, JPM, LMT, XOM)} } \\
+\hline
+\textbf{Symbol} & \textbf{Weight} & \textbf{ROI} & \textbf{Volatilty} \\ \hline
+AAPL   & 0.08 & 11.4\% & 28.8\% \\
+JPM    & 0.12 & 31.6\% & 19.1\% \\
+LMT    & 0.39 & 55.8\% & 16.3\% \\
+XOM    & 0.40 & 08.2\% & 13.0\% \\ 
+\hline
+portfolio & &  25.0\% & 11.76\% \\ 
+\hline
+\bottomrule
+\end{tabular}
+\caption{Portfolio \#1}
+\end{center}
+\end{table}
+$$</div>
+
+<img src="results/portfolios/AAPL_JPM_LMT_XOM/Portfolio.png" alt="Portfolio Performance"/>
+
+<h3><a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Historical Data</h3>
+
+<img src="results/portfolios/AAPL.png" alt="AAPL"/>
+<br/>
+<img src="results/portfolios/JPM.png" alt="JPM"/>
+<br/>
+<img src="results/portfolios/LMT.png" alt="LMT"/>
+<br/>
+<img src="results/portfolios/XOM.png" alt="XOM"/>
+<br/>
+
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">

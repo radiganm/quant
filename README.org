@@ -1,0 +1,11 @@
+* quant
+
+#+CAPTION: Quant
+#+TITLE: A collection of tools for quantitative finance.
+#+AUTHOR: Mac Radigan
+#+HOMEPAGE: http://radiganm.github.com/quant
+
+A collection of tools for quantitative finance.
+
+See the [[http://radiganm.github.io/quant/][quant project page]] for
+documentation.
